@@ -1,0 +1,16 @@
+[project]
+name = "cm-mcp-server"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "cm-client>=45.0.4",
+    "mcp[cli]>=1.26.0",
+]
+
+[tool.uv]
+package = true
+
+[project.scripts]
+run-my-server = "main:main"

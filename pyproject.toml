@@ -13,4 +13,4 @@ dependencies = [
 package = true
 
 [project.scripts]
-run-my-server = "main:main"
+cm-mcp-server = "cm_mcp_server.main:main"

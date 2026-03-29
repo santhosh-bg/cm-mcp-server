@@ -4,8 +4,8 @@ import argparse
 from loguru import logger
 from mcp.server.fastmcp import FastMCP
 from clients.cm.cm_client import CMClient
-from mcp_tool.cluster_service_operation import ClusterServiceOperation
-from mcp_tool.cluster_events import ClusterServiceEvents
+from mcp_tool.cluster_operation import ClusterOperation
+from mcp_tool.cluster_events import ClusterEvents
 
 # Define server instructions and dependencies
 SERVER_INSTRUCTIONS = """
@@ -80,8 +80,8 @@ def init_mcp_tool(mcp, cm_client_instance):
     """
     Init the mcp tooling
     """
-    ClusterServiceOperation(mcp, cm_client_instance)
-    ClusterServiceEvents(mcp, cm_client_instance)
+    ClusterOperation(mcp, cm_client_instance)
+    ClusterEvents(mcp, cm_client_instance)
 
 
 if __name__ == "__main__":

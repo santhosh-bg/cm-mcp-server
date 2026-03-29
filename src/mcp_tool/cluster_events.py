@@ -4,7 +4,7 @@ from mcp.types import CallToolResult, TextContent
 from pydantic import Field
 from typing import Optional
 
-class ClusterServiceEvents:
+class ClusterEvents:
     def __init__(self, mcp, cm_client_instance):
         self.mcp = mcp
         self.cm_client_instance = cm_client_instance

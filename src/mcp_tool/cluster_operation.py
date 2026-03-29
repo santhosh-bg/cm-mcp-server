@@ -1,16 +1,16 @@
 from loguru import logger
 from mcp.types import CallToolResult, TextContent
 
-class ClusterServiceOperation:
+class ClusterOperation:
 
     def __init__(self, mcp, cm_client_instance):
         self.mcp = mcp
         self.cm_client_instance = cm_client_instance
-        self.mcp.add_tool(self.get_cdp_cluster_health)
+        self.mcp.add_tool(self.get_service_health)
         self.mcp.add_tool(self.list_cluster_services)
     
 
-    def get_cdp_cluster_health(self) -> CallToolResult:
+    def get_service_health(self) -> CallToolResult:
         """
         Returns the health of each CDP service in the Cloudera Manager managed cluster.
         """
@@ -41,12 +41,11 @@ class ClusterServiceOperation:
         if not self.cm_client_instance:
             return "Error: CM Client is not initialized. Check server logs for configuration errors."
         try:
-            response = self.cm_client_instance.read_services(cluster_name="Cluster 1", view='summary')
-            lines = ["Available Services:"]
-            for s in response.items:
-                # Display Name (Type) -> Internal Name (ID)
-                lines.append(f"- {s.display_name} ({s.type}) -> ID: {s.name}")
-            return "\n".join(lines)
+            response = self.cm_client_instance.list_cluster_services()
+            return CallToolResult(
+                isError=False,
+                content=[TextContent(type='text', text=response)],
+            )
         except Exception as e:
             # This tells the AI the tool failed, rather than just returning error text
             return CallToolResult(
